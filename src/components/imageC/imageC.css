@@ -1,0 +1,39 @@
+HEAD
+.main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.ImageContainer {
+  width: 100%;
+  border-radius: 6px;
+  /* min-height: 50vh; */
+  /* max-height: 50vh; */
+  border-radius: 6px;
+}
+
+.ImageContainer-img {
+  width: 100%;
+  min-height: 50vh;
+  max-height: 50vh;
+}
+
+.main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.ImageContainer {
+  width: 100%;
+  border-radius: 6px;
+  /* min-height: 50vh; */
+  /* max-height: 50vh; */
+  border-radius: 6px;
+}
+
+.ImageContainer-img {
+  width: 100%;
+  min-height: 50vh;
+  max-height: 50vh;
+}
+

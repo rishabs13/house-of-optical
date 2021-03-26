@@ -1,0 +1,16 @@
+.products_container {
+    margin: 50px auto;
+
+}
+
+.products_container-cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.products_container-title {
+    color: gray;
+    margin-bottom: 10px;
+}
