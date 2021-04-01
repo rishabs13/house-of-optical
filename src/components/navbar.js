@@ -18,7 +18,6 @@ import { withStyles } from '@material-ui/core/styles';
 import AddCart from './card/AddCart';
 import { cart } from '../common/constants'
 
-
 const StyledBadge = withStyles((theme) => ({
   badge: {
     right: -3,
@@ -28,25 +27,21 @@ const StyledBadge = withStyles((theme) => ({
   },
 }))(Badge);
 
-
 const useStyles = makeStyles({
   toolbar: {
     justifyContent: 'space-between'
   },
   drawer:{
     maxWidth: 345
-  }
-
+  },
+  heading: {
+    height: '100%'
+  },
 });
 
-
-
-
-
-
 function NavBar() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [anchorEN, setAnchorEN] = React.useState(null);
+  const [anchorEl, setAnchorEl] = React.useState(false);
+  const [anchorEN, setAnchorEN] = React.useState(false);
 
   const classes = useStyles();
   const open = Boolean(anchorEl)
@@ -56,41 +51,31 @@ function NavBar() {
     setAnchorEl(event.currentTarget);
   };
 
-  // const handleMenu1 = (event) => {
-  //   setAnchorEN(event.currentTarget);
-
-  // };
-
   const handleClose = () => {
-    setAnchorEl(null);
+    setAnchorEl(false);
   };
-
-
-  // const handleClosed = () => {
-  //   setAnchorEN(null);
-  // };
- 
 
   return (
     <AppBar position='static'>
       <Toolbar>
         <Grid container className={classes.toolbar}>
-          <Grid item >
-            <Button component={Link} to='/' color='inherit'>
+          <Grid item>
+            <Button component={Link} to='/' color='inherit' className={classes.heading}>
               House of Optical
             </Button>
           </Grid>
 
           <Grid item>
-          <Drawer className={classes.drawer}  width = {500} anchor = 'right'  open={anchorEN} onClose={()=>setAnchorEN(false) } >
-          <AddCart />
-          
-              </Drawer>
-              <IconButton aria-label="cart"  onClick={()=>setAnchorEN(true)}> 
-                <StyledBadge badgeContent={cart.length} color="secondary">
-                    <ShoppingCartIcon />
-                </StyledBadge>
-             </IconButton>
+            <Drawer className={classes.drawer} width={500} anchor='right' open={anchorEN} onClose={()=>setAnchorEN(false) }>
+              <AddCart />
+            </Drawer>
+
+            <IconButton aria-label="cart" color="inherit" onClick={()=>setAnchorEN(true)}>
+              <StyledBadge badgeContent={cart.length}>
+                  <ShoppingCartIcon />
+              </StyledBadge>
+            </IconButton>
+
             <IconButton
               aria-label="account of current user"
               aria-controls="menu-appbar"
@@ -116,8 +101,8 @@ function NavBar() {
               open={open}
               onClose={handleClose}
             >
-              <MenuItem component={Link} to='/login'>Login</MenuItem>
-              <MenuItem component={Link} to='/signup'>Sign up</MenuItem>
+              <MenuItem component={Link} onClick={handleClose} to='/login'>Login</MenuItem>
+              <MenuItem component={Link} onClick={handleClose} to='/signup'>Sign up</MenuItem>
             </Menu>
           </Grid>
         </Grid>
