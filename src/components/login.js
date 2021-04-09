@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Avatar,
   Box,
@@ -16,6 +16,7 @@ import {
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
 import Copyright from './copyright';
+import { useAuth } from '../contexts/AuthContext';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -39,7 +40,30 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function LoginIn() {
+  const { signIn, googleSignIn } = useAuth()
   const classes = useStyles();
+
+  const [userDetails, setUserDetails] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleInput = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setUserDetails({ ...userDetails, [name]: value });
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    signIn(userDetails.email, userDetails.password)
+  }
+
+  const handleGoogleSignIn = (e) => {
+    e.preventDefault();
+    googleSignIn();
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -51,7 +75,7 @@ export default function LoginIn() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -62,6 +86,7 @@ export default function LoginIn() {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={handleInput}
           />
           <TextField
             variant="outlined"
@@ -73,6 +98,7 @@ export default function LoginIn() {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={handleInput}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -86,6 +112,16 @@ export default function LoginIn() {
             className={classes.submit}
           >
             Sign In
+          </Button>
+          <Button
+            type="click"
+            fullWidth
+            variant="contained"
+            color="secondary"
+            className={classes.submit}
+            onClick={handleGoogleSignIn}
+          >
+            Google Sign In
           </Button>
           <Grid container>
             <Grid item xs>

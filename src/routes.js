@@ -10,7 +10,7 @@ const AppRouters = () =>
 
   (
     <Switch>
-      <Route exact path='/' component={LandingPage} />
+      <Route exact path={`/${routes.DASHBOARD}`} component={LandingPage} />
       <Route exact path={`/${routes.LOGIN}`} component={LoginIn} />
       <Route exact path={`/${routes.SIGNUP}`} component={SignUp} />
       <Route exact path={`/${routes.CHECKOUT}`} component={Checkout} />

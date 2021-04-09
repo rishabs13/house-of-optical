@@ -50,7 +50,7 @@ export default function SignUp() {
 
 
 
-  const [userRegisteration, setUserRegisteration] = useState({
+  const [userRegistration, setUserRegistration] = useState({
     firstName: "",
     lastName: "",
     email: "",
@@ -62,17 +62,15 @@ export default function SignUp() {
     const name= e.target.name;
     const value = e.target.value;
 
-    setUserRegisteration({...userRegisteration, [name] : value}); 
+    setUserRegistration({...userRegistration, [name] : value});
   }
 
   const handleSubmit = (e) =>{
       e.preventDefault();
 
-      const newRecord = {...userRegisteration, id: new Date().getTime.toString() }
+      const newRecord = {...userRegistration, id: new Date().getTime.toString() }
       setRecords([...records,newRecord]);
-
-      signup(emailRef.current.value, passwordRef.current.value)
-      console.log(records);
+      signup(userRegistration.email, userRegistration.password)
   }
 
   return (
@@ -90,7 +88,7 @@ export default function SignUp() {
             <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="fname"
-                value = {userRegisteration.firstName}
+                value = {userRegistration.firstName}
                 onChange = {handleInput}
                 ref={firstNameRef}
                 name="firstName"
@@ -110,7 +108,7 @@ export default function SignUp() {
                 ref={lastNameRef}
                 id="lastName"
                 label="Last Name"
-                value = {userRegisteration.lastName}
+                value = {userRegistration.lastName}
                 onChange = {handleInput}
                 name="lastName"
                 autoComplete="lname"
@@ -124,7 +122,7 @@ export default function SignUp() {
                 id="email"
                 label="Email Address"
                 ref= {emailRef}
-                value = {userRegisteration.email}
+                value = {userRegistration.email}
                 onChange = {handleInput}
                 name="email"
                 autoComplete="email"
@@ -135,7 +133,7 @@ export default function SignUp() {
                 variant="outlined"
                 required
                 fullWidth
-                value = {userRegisteration.password}
+                value = {userRegistration.password}
                 onChange = {handleInput}
                 name="password"
                 label="Password"

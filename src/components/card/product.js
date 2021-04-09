@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import {
   Button,
   Card,
@@ -11,6 +12,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import './product.css'
 import { cart } from '../../common/constants'
 import { total, setTotal } from '../../common/constants'
+import { addToCart } from '../../redux/Actions/cartAction';
 
 const useStyles = makeStyles({
   cardContent: {
@@ -20,19 +22,17 @@ const useStyles = makeStyles({
 })
 
 
-const onAddToCart = (props) =>
-    {
-      setTotal(total + props.price);
-      cart.push(props);
-      
-      console.log(total);
-    }
-    
 
 const Product = ({ product}) => {
     const classes = useStyles();
-    
+  const  dispatch = useDispatch();
 
+    const onAddToCart = (props) =>
+    {
+      dispatch(addToCart(product));
+      // setTotal(total + props.price);
+      // cart.push(props);
+    }
   return (
     <div className="card">
     <Card>
