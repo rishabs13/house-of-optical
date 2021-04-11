@@ -1,5 +1,4 @@
 import React from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -8,8 +7,11 @@ import { Grid, Link, Box } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    backgroundColor:
+      theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[800],
     display: 'flex',
     flexDirection: 'column',
+    marginTop: '32px',
     width: '100%'
   },
   main: {
@@ -18,10 +20,10 @@ const useStyles = makeStyles((theme) => ({
   },
   footer: {
     padding: theme.spacing(3, 2),
-    marginTop: 'auto',
-    backgroundColor:
-      theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[800],
   },
+  list: {
+    listStyleType: 'none'
+  }
 }));
 
 const footers = [
@@ -48,8 +50,6 @@ export default function StickyFooter() {
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
-      <footer className={classes.footer}>
       <Container maxWidth="md" component="footer" className={classes.footer}>
         <Grid container spacing={4} justify="space-evenly">
           {footers.map((footer) => (
@@ -57,7 +57,8 @@ export default function StickyFooter() {
               <Typography variant="h6" color="textPrimary" gutterBottom>
                 {footer.title}
               </Typography>
-              <ul>
+
+              <ul className={classes.list}>
                 {footer.description.map((item) => (
                   <li key={item}>
                     <Link href="#" variant="subtitle1" color="textSecondary">
@@ -69,11 +70,11 @@ export default function StickyFooter() {
             </Grid>
           ))}
         </Grid>
+
         <Box mt={5}>
           <Copyright />
         </Box>
       </Container>
-      </footer>
     </div>
   );
 }

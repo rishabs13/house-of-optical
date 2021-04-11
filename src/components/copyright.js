@@ -8,9 +8,8 @@ function Copyright() {
       {'Copyright © '}
       <Link color="inherit" href="/">
         House of Optical
-        </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
+      </Link>
+      {' ' + new Date().getFullYear() + '.'}
     </Typography>
   );
 }

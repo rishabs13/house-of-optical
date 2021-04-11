@@ -1,20 +1,20 @@
-import React, {useRef} from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
+import React, { useRef, useState } from 'react';
+
+import {
+  Avatar,
+  Button,
+  Checkbox,
+  Container,
+  FormControlLabel,
+  Grid,
+  Link,
+  TextField,
+  Typography
+} from '@material-ui/core'
+
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import Copyright from './copyright';
-import {useState} from 'react';
-import {useAuth} from '../contexts/AuthContext';
+import { useAuth } from '../contexts/AuthContext';
 
 
 
@@ -40,15 +40,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
-
   const firstNameRef = useRef()
   const lastNameRef = useRef()
   const emailRef = useRef()
   const passwordRef = useRef()
-  const {signup} = useAuth()
-
-
-
+  const { signup } = useAuth()
 
   const [userRegisteration, setUserRegisteration] = useState({
     firstName: "",
@@ -62,7 +58,7 @@ export default function SignUp() {
     const name= e.target.name;
     const value = e.target.value;
 
-    setUserRegisteration({...userRegisteration, [name] : value}); 
+    setUserRegisteration({...userRegisteration, [name] : value});
   }
 
   const handleSubmit = (e) =>{
@@ -72,12 +68,10 @@ export default function SignUp() {
       setRecords([...records,newRecord]);
 
       signup(emailRef.current.value, passwordRef.current.value)
-      console.log(records);
   }
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -171,9 +165,6 @@ export default function SignUp() {
           </Grid>
         </form>
       </div>
-      <Box mt={5}>
-        <Copyright />
-      </Box>
     </Container>
   );
 }
