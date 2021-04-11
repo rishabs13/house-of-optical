@@ -3,8 +3,7 @@ import { productDetailsData } from '../../common/constants'
 import Product from '../card/product'
 import './products.css'
 
-export default function Products({ product }) {
-
+function Products() {
   return (
     <div className="products_container">
         <h1 className="products_container-title">Best Sellers</h1>
@@ -18,3 +17,5 @@ export default function Products({ product }) {
     </div>
   )
 }
+
+export default Products;
