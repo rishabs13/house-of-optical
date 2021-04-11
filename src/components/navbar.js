@@ -1,22 +1,21 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
+import { compose } from 'redux'
+import { connect } from 'react-redux'
 import {
   AppBar,
+  Badge,
   Button,
+  Drawer,
   Grid,
   IconButton,
   Menu,
   MenuItem,
   Toolbar,
-  Drawer
 } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles';
-import { AccountCircle } from '@material-ui/icons';
-import { Link } from 'react-router-dom';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import Badge from '@material-ui/core/Badge';
 import { withStyles } from '@material-ui/core/styles';
+import { AccountCircle, ShoppingCart } from '@material-ui/icons';
 import AddCart from './card/AddCart';
-import { cart } from '../common/constants'
 
 const StyledBadge = withStyles((theme) => ({
   badge: {
@@ -27,7 +26,7 @@ const StyledBadge = withStyles((theme) => ({
   },
 }))(Badge);
 
-const useStyles = makeStyles({
+const useStyles = {
   toolbar: {
     justifyContent: 'space-between'
   },
@@ -37,78 +36,87 @@ const useStyles = makeStyles({
   heading: {
     height: '100%'
   },
-});
+};
 
-function NavBar() {
-  const [anchorEl, setAnchorEl] = React.useState(false);
-  const [anchorEN, setAnchorEN] = React.useState(false);
+class NavBar extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      anchorEl: false,
+      anchorEN: false,
+    }
+  }
 
-  const classes = useStyles();
-  const open = Boolean(anchorEl)
-  const opened = Boolean(anchorEN)
+  render() {
+    const { classes, cart } = this.props;
+    const open = Boolean(this.state.anchorEl)
 
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+    const handleMenu = (event) => {
+      event
+        ? this.setState({ anchorEl: event.currentTarget })
+        : this.setState({ anchorEl: null })
+    };
 
-  const handleClose = () => {
-    setAnchorEl(false);
-  };
+    return (
+      <AppBar position='static'>
+        <Toolbar>
+          <Grid container className={classes.toolbar}>
+            <Grid item>
+              <Button component={Link} to='/' color='inherit' className={classes.heading}>
+                House of Optical
+              </Button>
+            </Grid>
 
-  return (
-    <AppBar position='static'>
-      <Toolbar>
-        <Grid container className={classes.toolbar}>
-          <Grid item>
-            <Button component={Link} to='/' color='inherit' className={classes.heading}>
-              House of Optical
-            </Button>
+            <Grid item>
+              <Drawer className={classes.drawer} width={500} anchor='right' open={this.state.anchorEN} onClose={() => this.setState({ anchorEN: false }) }>
+                <AddCart />
+              </Drawer>
+
+              <IconButton aria-label="cart" color="inherit" onClick={() => this.setState({ anchorEN: true }) }>
+                <StyledBadge badgeContent={cart.items.length}>
+                    <ShoppingCart />
+                </StyledBadge>
+              </IconButton>
+
+              <IconButton
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+
+              <Menu
+                id="menu-appbar"
+                anchorEl={this.state.anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={open}
+                onClose={() => handleMenu(null)}
+              >
+                <MenuItem component={Link} onClick={() => handleMenu(null)} to='/login'>Login</MenuItem>
+                <MenuItem component={Link} onClick={() => handleMenu(null)} to='/signup'>Sign up</MenuItem>
+              </Menu>
+            </Grid>
           </Grid>
-
-          <Grid item>
-            <Drawer className={classes.drawer} width={500} anchor='right' open={anchorEN} onClose={()=>setAnchorEN(false) }>
-              <AddCart />
-            </Drawer>
-
-            <IconButton aria-label="cart" color="inherit" onClick={()=>setAnchorEN(true)}>
-              <StyledBadge badgeContent={cart.length}>
-                  <ShoppingCartIcon />
-              </StyledBadge>
-            </IconButton>
-
-            <IconButton
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleMenu}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={open}
-              onClose={handleClose}
-            >
-              <MenuItem component={Link} onClick={handleClose} to='/login'>Login</MenuItem>
-              <MenuItem component={Link} onClick={handleClose} to='/signup'>Sign up</MenuItem>
-            </Menu>
-          </Grid>
-        </Grid>
-      </Toolbar>
-    </AppBar>
-  )
+        </Toolbar>
+      </AppBar>
+    )
+  }
 }
 
-export default NavBar;
+export default compose(
+  connect((state) => ({
+    cart: state.cart
+  })),
+  withStyles(useStyles)
+)(NavBar);

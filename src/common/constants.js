@@ -5,22 +5,14 @@ const routes = {
   CHECKOUT: 'checkout'
 };
 
-export const cart = [];
-
-let total = 0;
-function setTotal(value) {
-  total = value;
-}
-
-export { total, setTotal };
-
-export const productDetailsData = [
+const productDetailsData = [
   {
     id: 1,
     title: 'Pisces Asian fit',
     imgUrl: '/images/product-1.webp',
     description: '',
     price: 10,
+    quantity: 1,
   },
   {
     id: 2,
@@ -28,6 +20,7 @@ export const productDetailsData = [
     imgUrl: '/images/product-2.webp',
     description: '',
     price: 20,
+    quantity: 1,
   },
   {
     id: 3,
@@ -35,6 +28,7 @@ export const productDetailsData = [
     imgUrl: '/images/product-3.webp',
     description: '',
     price: 30,
+    quantity: 1,
   },
   {
     id: 4,
@@ -42,6 +36,7 @@ export const productDetailsData = [
     imgUrl: '/images/product-4.webp',
     description: '',
     price: 40,
+    quantity: 1,
   },
   {
     id: 5,
@@ -49,6 +44,7 @@ export const productDetailsData = [
     imgUrl: 'https://cwcdn.coolwinks.com/shared/images/blog/designer-eyeglass-frames.jpg',
     description: '',
     price: 50,
+    quantity: 1,
   },
   {
     id: 6,
@@ -56,7 +52,8 @@ export const productDetailsData = [
     imgUrl: 'https://image.ebdcdn.com/image/upload/c_fill,e_sharpen:70,f_auto,h_180,q_auto:good,w_360/v1/product/front/white/mt6567.jpg',
     description: '',
     price: 60,
+    quantity: 1,
   },
 ]
 
-export default routes;
+export { routes, productDetailsData };

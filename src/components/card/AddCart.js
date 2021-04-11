@@ -1,6 +1,6 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
-import { cart, total } from '../../common/constants'
 import CartProd from './CartProd'
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles'
@@ -11,27 +11,36 @@ const useStyles = makeStyles({
   }
 })
 
-const AddCart = () => {
+const AddCart = (props) => {
   const classes = useStyles()
+  const { cart } = props
+  const { items, total } = cart
 
   return(
     <div className={classes.main}>
       <h2>Your Shopping Cart </h2>
-      {cart.length === 0 ? <p>No item in cart.</p> : null}
+      {items.length === 0 ? <p>No item in cart.</p> : null}
 
       {
-        cart.map(product => (
-          <CartProd product={product} />
+        items.map(product => (
+          <CartProd product={product} key={product.id} />
         ))
       }
 
-      {cart.length != 0? <h3>Total : ${total}</h3> : null}
-
-      {cart.length != 0
-        ? <Button component={Link} to='/checkout' variant="contained" color="secondary">Checkout</Button>
-        : null}
+      {
+        items.length != 0
+          ? (
+            <React.Fragment>
+              <h3>Total : ${total}</h3>
+              <Button component={Link} to='/checkout' variant="contained" color="secondary">Checkout</Button>
+            </React.Fragment>
+            )
+          : null
+      }
     </div>
   );
 }
 
-export default AddCart;
+export default connect((state) => ({
+  cart: state.cart
+}))(AddCart);

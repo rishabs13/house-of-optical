@@ -1,4 +1,6 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { addToCart } from '../../actions/cart'
 import {
   Button,
   Card,
@@ -8,9 +10,8 @@ import {
   Typography
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+
 import './product.css'
-import { cart } from '../../common/constants'
-import { total, setTotal } from '../../common/constants'
 
 const useStyles = makeStyles({
   cardContent: {
@@ -19,47 +20,40 @@ const useStyles = makeStyles({
   }
 })
 
+const Product = ({ dispatch, product }) => {
+  const classes = useStyles();
 
-const onAddToCart = (props) =>
-    {
-      setTotal(total + props.price);
-      cart.push(props);
-      
-      console.log(total);
-    }
-    
-
-const Product = ({ product}) => {
-    const classes = useStyles();
-    
+  const onAddToCart = () => {
+    dispatch(addToCart(product))
+  }
 
   return (
     <div className="card">
-    <Card>
-      <CardMedia
-        component='img'
-        image={product.imgUrl}
-        alt={product.title}
-        height={150}
-      />
-      <CardContent>
-        <div className={classes.cardContent}>
-          <Typography gutterBottom variant="h5" component="h2">
-            {product.title}
-          </Typography>
-          <Typography gutterBottom variant="h5" component="h2">
-            ${' '}{product.price}
-          </Typography>
-        </div>
-      </CardContent>
-      <CardActions>
-        <Button variant="outlined"  onClick= {()=> onAddToCart(product)}>
-          Add to Cart
-        </Button>
-      </CardActions>
-    </Card>
+      <Card>
+        <CardMedia
+          component='img'
+          image={product.imgUrl}
+          alt={product.title}
+          height={150}
+        />
+        <CardContent>
+          <div className={classes.cardContent}>
+            <Typography gutterBottom variant="h5" component="h2">
+              {product.title}
+            </Typography>
+            <Typography gutterBottom variant="h5" component="h2">
+              ${' '}{product.price}
+            </Typography>
+          </div>
+        </CardContent>
+        <CardActions>
+          <Button variant="outlined" onClick={() => onAddToCart()}>
+            Add to Cart
+          </Button>
+        </CardActions>
+      </Card>
     </div>
   )
 }
 
-export default Product;
+export default connect()(Product);

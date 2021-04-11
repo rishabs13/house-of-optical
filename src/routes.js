@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import routes from './common/constants';
+import { routes } from './common/constants';
 import LandingPage from './components/landingPage'
 import Login from './components/login';
 import SignUp from './components/signup';
