@@ -18,6 +18,7 @@ const useStyles = makeStyles({
   cardContent: {
     display: 'flex',
     justifyContent: 'space-between',
+    font: '0.7em'
   }
 })
 
