@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Stepper from '@material-ui/core/Stepper';
@@ -46,20 +46,18 @@ const useStyles = makeStyles((theme) => ({
 
 const steps = ['Shipping address','Review your order','Payment' ];
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <AddressForm />;
-    case 1:
-      return <Review />;
-    case 2:
-      return <PaymentForm />;
-    default:
-      throw new Error('Unknown step');
-  }
-}
 
 export default function Checkout() {
+  const [userAddress, setUserAddress] = useState({
+    firstName: "",
+    lastName: "",
+    address1: "",
+    address2: "",
+    city: "",
+    state: "",
+    zip: "",
+    country: ""
+  });
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -70,6 +68,19 @@ export default function Checkout() {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
+
+  function getStepContent(step) {
+    switch (step) {
+      case 0:
+        return <AddressForm userAddress={userAddress} setUserAddress={setUserAddress}/>;
+      case 1:
+        return <Review user={userAddress} />;
+      case 2:
+        return <PaymentForm />;
+      default:
+        throw new Error('Unknown step');
+    }
+  }
 
   return (
     <React.Fragment>

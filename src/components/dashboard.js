@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom';
 import { Button, CardMedia, Dialog, Fab, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import ContactSupportIcon from '@material-ui/icons/ContactSupport';
@@ -42,6 +42,12 @@ function Dashboard() {
 
       <Grid item xs={12} >
         <Products showSnackBar={() => setSnackOpen(true)}/>
+      </Grid>
+
+      <Grid item xs={12}>
+      <Link to="/products" style={{ outline: 'none'}}>
+        <Button variant="outlined" color="primary">View All Products</Button>
+        </Link>
       </Grid>
 
       <Fab color='primary' className={classes.fabPosition} onClick={handleClickOpen}>

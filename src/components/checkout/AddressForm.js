@@ -9,18 +9,9 @@ import address from '../../common/constants';
 
 
 
-export default function AddressForm() {
+export default function AddressForm({userAddress, setUserAddress}) {
 
-  const [userAddress, setUserAddress] = useState({
-    firstName: "",
-    lastName: "",
-    address1: "",
-    address2: "",
-    city: "",
-    state: "",
-    zip: "",
-    country: ""
-  });
+
 
   const handleInput = (e) =>{
     const name= e.target.name;
@@ -45,6 +36,7 @@ export default function AddressForm() {
             fullWidth
             autoComplete="given-name"
             value = {userAddress.firstName}
+            onChange={handleInput}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -56,6 +48,7 @@ export default function AddressForm() {
             fullWidth
             autoComplete="family-name"
             value = {address.lastName}
+            onChange={handleInput}
           />
         </Grid>
         <Grid item xs={12}>
@@ -67,6 +60,7 @@ export default function AddressForm() {
             fullWidth
             autoComplete="shipping address-line1"
             value = {userAddress.address1}
+            onChange={handleInput}
           />
         </Grid>
         <Grid item xs={12}>
@@ -77,6 +71,7 @@ export default function AddressForm() {
             fullWidth
             autoComplete="shipping address-line2"
             value = {userAddress.address2}
+            onChange={handleInput}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -88,6 +83,7 @@ export default function AddressForm() {
             fullWidth
             autoComplete="shipping address-level2"
             value = {userAddress.city}
+            onChange={handleInput}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -102,7 +98,8 @@ export default function AddressForm() {
             fullWidth
             autoComplete="shipping postal-code"
             value = {userAddress.zip}
-            
+            onChange={handleInput}
+
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -114,6 +111,7 @@ export default function AddressForm() {
             fullWidth
             autoComplete="shipping country"
             value = {userAddress.country}
+            onChange={handleInput}
           />
         </Grid>
         <Grid item xs={12}>

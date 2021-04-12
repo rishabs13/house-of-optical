@@ -14,7 +14,6 @@ import Grid from '@material-ui/core/Grid';
 //   { name: 'Product 4', desc: 'Best thing of all', price: '$14.11' },
 //   { name: 'Shipping', desc: '', price: 'Free' },
 // ];
-const addresses = ['1 Material-UI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
 
 const useStyles = makeStyles((theme) => ({
   listItem: {
@@ -28,8 +27,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Review() {
+export default function Review({user}) {
   const classes = useStyles();
+  const addresses = [user.address1, user.city, user.state, user.zip, user.country];
   const cartData = useSelector(state => {
     if (state.cartReducer) {
         return state.cartReducer
@@ -62,7 +62,7 @@ export default function Review() {
           <Typography variant="h6" gutterBottom className={classes.title}>
             Shipping Address
           </Typography>
-          <Typography gutterBottom>John Smith</Typography>
+          <Typography gutterBottom>{user.firstName}{' '}{user.lastName}</Typography>
           <Typography gutterBottom>{addresses.join(', ')}</Typography>
         </Grid>
       </Grid>
