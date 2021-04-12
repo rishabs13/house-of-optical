@@ -7,6 +7,7 @@ import { Routers } from './routes';
 import AuthProvider from  './contexts/AuthContext'
 import { CssBaseline, Grid } from '@material-ui/core'
 import NavBar from './components/navbar'
+import Navbar2 from './components/navbar2'
 import Footer from './components/Footer/footer';
 
 function App() {
@@ -18,9 +19,10 @@ function App() {
           <AuthProvider>
             <CssBaseline />
 
-            <Grid item xs={12}>
-              <NavBar />
-            </Grid>
+            <Grid item xs={12}> <NavBar /></Grid>
+            
+              
+            
 
             <Routers />
 

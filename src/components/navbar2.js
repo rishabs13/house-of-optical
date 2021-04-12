@@ -7,16 +7,16 @@ import {
   Menu,
   MenuItem,
   Toolbar,
-  Drawer
+  Typography
+  
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import { AccountCircle } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+
 import Badge from '@material-ui/core/Badge';
 import { withStyles } from '@material-ui/core/styles';
-import AddCart from './card/AddCart';
-import { cart } from '../common/constants'
+
 
 const StyledBadge = withStyles((theme) => ({
   badge: {
@@ -39,7 +39,7 @@ const useStyles = makeStyles({
   },
 });
 
-function NavBar() {
+function NavBar2() {
   const [anchorEl, setAnchorEl] = React.useState(false);
   const [anchorEN, setAnchorEN] = React.useState(false);
 
@@ -60,21 +60,13 @@ function NavBar() {
       <Toolbar>
         <Grid container className={classes.toolbar}>
           <Grid item>
-            <Button component={Link} to='/dashboard' color='inherit' className={classes.heading}>
-              House of Optical
-            </Button>
+          <Typography component="h1" variant="h5">
+          House of Optical
+        </Typography>
+           
           </Grid>
 
           <Grid item>
-            <Drawer className={classes.drawer} width={500} anchor='right' open={anchorEN} onClose={()=>setAnchorEN(false) }>
-              <AddCart />
-            </Drawer>
-
-            <IconButton aria-label="cart" color="inherit" onClick={()=>setAnchorEN(true)}>
-              <StyledBadge badgeContent={cart.length}>
-                  <ShoppingCartIcon />
-              </StyledBadge>
-            </IconButton>
 
             <IconButton
               aria-label="account of current user"
@@ -111,4 +103,4 @@ function NavBar() {
   )
 }
 
-export default NavBar;
+export default NavBar2;

@@ -44,16 +44,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const steps = ['Shipping address', 'Payment details', 'Review your order'];
+const steps = ['Shipping address','Review your order','Payment' ];
 
 function getStepContent(step) {
   switch (step) {
     case 0:
       return <AddressForm />;
     case 1:
-      return <PaymentForm />;
-    case 2:
       return <Review />;
+    case 2:
+      return <PaymentForm />;
     default:
       throw new Error('Unknown step');
   }
