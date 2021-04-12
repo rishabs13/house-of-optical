@@ -9,6 +9,8 @@ const routes = {
 
 export const cart = [];
 
+export const address = [];
+
 let total = 0;
 function setTotal(value) {
   total = value;
@@ -47,14 +49,14 @@ export const productDetailsData = [
   },
   {
      "id":5,
-     "title":"Eyeglasses 5",
+     "title":"Guess Eyeglasses",
      "imgUrl":"/images/Eyeglasses/image5.jpg",
      "description":"Ova/ Premium Anti Glare Blue-light-filtering Transistion Progressive (No Line Bifocal) Premium Bifocal",
      "price":350
   },
   {
      "id":6,
-     "title":"Eyeglasses 6",
+     "title":"Gucci Eyeglasses",
      "imgUrl":"/images/Eyeglasses/image6.jpg",
      "description":"Trendy Premium Anti Glare Blue-light-filtering Transistion Progressive (No Line Bifocal) Premium Bifocal",
      "price":450

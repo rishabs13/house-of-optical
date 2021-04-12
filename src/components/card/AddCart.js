@@ -52,7 +52,7 @@ const AddCart = (product) => {
                 alignItems: 'center',
                 boxShadow: 'inset 0 1px 0 0 rgba(0, 0, 0, 0.12)'
             }}>
-                {cartData.cartItems.length !== 0 ? <h3>Total : ${cartData.cartPrice}</h3> : null}
+                {cartData.cartItems.length !== 0 ? <h3>Total : ${cartData.cartPrice}</h3>  : null}
             {cartData.cartItems.length !== 0 ? <div style={{ width : '100%'}}>
                 <Link to="/checkout" style={{ outline: 'none'}}>
                     <Button variant="contained" style={{width : '100%'}} color="secondary">Checkout</Button>

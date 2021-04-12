@@ -1,13 +1,23 @@
 import React, { useState } from "react";
+import { useSelector } from 'react-redux';
 import ReactDOM from "react-dom";
 import Typography from '@material-ui/core/Typography';
 
 
 const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
 
-export default function Paypal() {
 
-  const [price, setPrice] = useState(10);
+export default function Paypal() {
+  const cartData = useSelector(state => {
+    if (state.cartReducer) {
+        return state.cartReducer
+    }
+    return [];
+}
+);
+
+  const price = cartData.cartPrice;
+
   const createOrder = (data, actions) =>{
     return actions.order.create({
       purchase_units: [{
@@ -37,37 +47,3 @@ export default function Paypal() {
   );
 }
 
-//   const paypal =useRef();
-
-//   useEffect(() => {
-//     Window.paypal.Buttons({
-//       createOrder: (data, actions) =>{
-//         return actions.order.create({
-//           intent: "CAPTURE", 
-//           purchase_units: [
-//             {
-//               amount: {
-//                 currency_code: "CAD",
-//                 value: 100,
-//               },
-//             },
-//           ],
-//         });
-//       },
-//       onApprove: (data, actions) => {
-//         return actions.order.capture();
-//       }
-//     }).render(paypal.current)
-//   }, []);
-
-//   return(
-
-//     <div>
-//       <div ref={paypal}></div>
-//     </div>
-//   )
-
-  
-// }
-
-//export default Paypal

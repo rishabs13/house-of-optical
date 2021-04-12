@@ -1,16 +1,40 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
+import address from '../../common/constants';
+
+
+
 export default function AddressForm() {
+
+  const [userAddress, setUserAddress] = useState({
+    firstName: "",
+    lastName: "",
+    address1: "",
+    address2: "",
+    city: "",
+    state: "",
+    zip: "",
+    country: ""
+  });
+
+  const handleInput = (e) =>{
+    const name= e.target.name;
+    const value = e.target.value;
+
+    setUserAddress({...userAddress, [name] : value});
+  }
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
         Shipping address
       </Typography>
+      <form>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -20,6 +44,7 @@ export default function AddressForm() {
             label="First name"
             fullWidth
             autoComplete="given-name"
+            value = {userAddress.firstName}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -30,6 +55,7 @@ export default function AddressForm() {
             label="Last name"
             fullWidth
             autoComplete="family-name"
+            value = {address.lastName}
           />
         </Grid>
         <Grid item xs={12}>
@@ -40,6 +66,7 @@ export default function AddressForm() {
             label="Address line 1"
             fullWidth
             autoComplete="shipping address-line1"
+            value = {userAddress.address1}
           />
         </Grid>
         <Grid item xs={12}>
@@ -49,6 +76,7 @@ export default function AddressForm() {
             label="Address line 2"
             fullWidth
             autoComplete="shipping address-line2"
+            value = {userAddress.address2}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -59,6 +87,7 @@ export default function AddressForm() {
             label="City"
             fullWidth
             autoComplete="shipping address-level2"
+            value = {userAddress.city}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -72,6 +101,8 @@ export default function AddressForm() {
             label="Zip / Postal code"
             fullWidth
             autoComplete="shipping postal-code"
+            value = {userAddress.zip}
+            
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -82,6 +113,7 @@ export default function AddressForm() {
             label="Country"
             fullWidth
             autoComplete="shipping country"
+            value = {userAddress.country}
           />
         </Grid>
         <Grid item xs={12}>
@@ -91,6 +123,7 @@ export default function AddressForm() {
           />
         </Grid>
       </Grid>
+      </form>
     </React.Fragment>
   );
 }
