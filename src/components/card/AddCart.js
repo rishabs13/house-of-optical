@@ -25,23 +25,32 @@ const AddCart = (product) => {
             flexDirection: 'column',
             alignItems: 'center'
             }}>
-            <h1>Your Shopping Cart </h1>
+            <h1 style={{
+                boxShadow: 'inset 0 -1px 0 0 rgba(0, 0, 0, 0.12)',
+                paddingBottom: '10px',
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'center'
+            }}>Your Shopping Cart </h1>
             {cartData.cartItems.length === 0 ? <p style={{ fontSize: '20px' }}>No item in cart.</p> : null}
             {
-                cartData.cartItems.map(product => {
+                <div style={{marginTop: '10px',height: '85vh', overflow :'auto'}}>
+                {cartData.cartItems.map(product => {
                     return <CartProd product={product} />
-                })
+                })}
+                </div>
             }
 
             <div style={{
                 position: "absolute",
-                bottom: "35px",
+                bottom: "30px",
                 height: "10%",
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-around",
                 width: '90%',
-                alignItems: 'center'
+                alignItems: 'center',
+                boxShadow: 'inset 0 1px 0 0 rgba(0, 0, 0, 0.12)'
             }}>
                 {cartData.cartItems.length !== 0 ? <h3>Total : ${cartData.cartPrice}</h3> : null}
             {cartData.cartItems.length !== 0 ? <div style={{ width : '100%'}}>

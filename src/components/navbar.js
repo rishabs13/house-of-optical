@@ -9,6 +9,7 @@ import {
   Toolbar,
   Drawer
 } from '@material-ui/core'
+import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { AccountCircle } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
@@ -31,7 +32,7 @@ const useStyles = makeStyles({
   toolbar: {
     justifyContent: 'space-between'
   },
-  drawer:{
+  drawer: {
     maxWidth: 345
   },
   heading: {
@@ -55,6 +56,14 @@ function NavBar() {
     setAnchorEl(false);
   };
 
+  const cartData = useSelector(state => {
+    if (state.cartReducer) {
+      return state.cartReducer
+    }
+    return [];
+  }
+  );
+
   return (
     <AppBar position='static'>
       <Toolbar>
@@ -66,17 +75,24 @@ function NavBar() {
           </Grid>
 
           <Grid item>
-            <Drawer className={classes.drawer} width={500} anchor='right' open={anchorEN} onClose={()=>setAnchorEN(false) }>
+            <Drawer className={classes.drawer} width={500} anchor='right' open={anchorEN} onClose={() => setAnchorEN(false)}>
               <AddCart />
             </Drawer>
 
-            <IconButton aria-label="cart" color="inherit" onClick={()=>setAnchorEN(true)}>
+            {/* <IconButton aria-label="cart" color="inherit" onClick={()=>setAnchorEN(true)}>
               <StyledBadge badgeContent={cart.length}>
                   <ShoppingCartIcon />
               </StyledBadge>
+            </IconButton> */}
+            <IconButton
+              aria-label="cart"
+              color="white" onClick={() => setAnchorEN(true)}>
+              <StyledBadge badgeContent={cartData.cartItems.length} color="secondary">
+                <ShoppingCartIcon />
+              </StyledBadge>
             </IconButton>
 
-            <IconButton
+            {/* <IconButton
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
@@ -103,7 +119,7 @@ function NavBar() {
             >
               <MenuItem component={Link} onClick={handleClose} to='/login'>Login</MenuItem>
               <MenuItem component={Link} onClick={handleClose} to='/signup'>Sign up</MenuItem>
-            </Menu>
+            </Menu> */}
           </Grid>
         </Grid>
       </Toolbar>

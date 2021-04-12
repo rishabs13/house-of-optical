@@ -5,6 +5,7 @@ import Dashboard from './components/dashboard'
 import LoginIn from './components/login';
 import SignUp from './components/signup';
 import Checkout from './components/checkout/Checkout';
+import AllProducts from './components/cards/allProducts';
 
 const AppRouters = () =>
 
@@ -14,6 +15,7 @@ const AppRouters = () =>
       <Route exact path={`/${routes.LOGIN}`} component={LoginIn} />
       <Route exact path={`/${routes.SIGNUP}`} component={SignUp} />
       <Route exact path={`/${routes.CHECKOUT}`} component={Checkout} />
+      <Route exact path={`/${routes.PRODUCTS}`} component={AllProducts} />
       <Route path="*" render={() => <div>Page not Found</div>} />
     </Switch>
   )

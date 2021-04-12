@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <script src="https://www.paypal.com/sdk/js?client-id=Ad8avU0yRcmpp9lvt-Bd0N9PHyql1wZjdMSdsUOagwBYaCAuj8Aoksnr8BVbv1lnsKT4QtIC2WMsMgsF&currency=CAD"></script>
+    <script src="https://appstatic.jeeliz.com/jeewidget/JeelizNNCwidget.js"></script>
     <meta
       name="description"
       content="Web site created using create-react-app"
@@ -33,7 +34,26 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <!-- <div id="roots">
+      <button id="virtual">Try now!!</button>
+      <div id="JeeWidget">
+        <canvas id="JeeWidgetCanvas"></canvas>
+      </div>
+    </div> -->
     <div id="root"></div>
+    <script defer>
+      function startWidget() {
+        JEEWIDGET.start({
+          sku: 'blaze_round_or_bleudegrademiroir',
+          searchImageMask: 'https://appstatic.jeeliz.com/jeewidget/images/target.png',
+          searchImageColor: 0xFF0000
+         })
+       }
+       const div = document.getElementById('virtual');
+       div.addEventListener('click', startWidget);
+       const mainContainer = document.getElementById('root');
+       mainContainer.style.display = 'hidden';
+    </script>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

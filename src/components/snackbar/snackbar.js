@@ -4,7 +4,8 @@ import { Snackbar } from '@material-ui/core';
 
 function SnackBarComponent({
     open,
-    message
+    message,
+    onClose
 }) {
     return (
         <Snackbar
@@ -13,8 +14,9 @@ function SnackBarComponent({
                 horizontal: 'right',
             }}
             open={open}
-            autoHideDuration={6000}
+            autoHideDuration={1500}
             message={message}
+            onClose={onClose}
         />
     );
 }

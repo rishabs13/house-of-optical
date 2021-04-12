@@ -18,21 +18,24 @@ const useStyles = makeStyles({
   cardContent: {
     display: 'flex',
     justifyContent: 'space-between',
-    
+    flexDirection :'column'
+  },
+  CardActions :{
+    display: 'flex',
+    justifyContent: 'center'
   }
 })
 
 
 
-const Product = ({ product}) => {
+const Product = ({ product, showSnackBar}) => {
     const classes = useStyles();
   const  dispatch = useDispatch();
 
     const onAddToCart = (props) =>
     {
       dispatch(addToCart(product));
-      // setTotal(total + props.price);
-      // cart.push(props);
+      showSnackBar();
     }
   return (
     <div className="card">
@@ -45,16 +48,16 @@ const Product = ({ product}) => {
       />
       <CardContent>
         <div className={classes.cardContent}>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom variant="h5" component="h2" style={{justifyContent: 'flex-start'}}>
             {product.title}
           </Typography>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom variant="h5" component="h2" style={{justifyContent: 'flex-start'}}>
             ${' '}{product.price}
           </Typography>
         </div>
       </CardContent>
-      <CardActions>
-        <Button variant="outlined"  onClick= {()=> onAddToCart(product)}>
+      <CardActions className={classes.CardActions}>
+        <Button style={{width: '90%', backgroundColor: '#3f51b5', color: 'white'}} variant="outlined"  onClick= {()=> onAddToCart(product)}>
           Add to Cart
         </Button>
       </CardActions>

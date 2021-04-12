@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
@@ -35,6 +36,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Review() {
   const classes = useStyles();
+  const cartData = useSelector(state => {
+    if (state.cartReducer) {
+        return state.cartReducer
+    }
+    return [];
+}
+);
 
   return (
     <React.Fragment>
@@ -42,9 +50,9 @@ export default function Review() {
         Order summary
       </Typography>
       <List disablePadding>
-        {products.map((product) => (
-          <ListItem className={classes.listItem} key={product.name}>
-            <ListItemText primary={product.name} secondary={product.desc} />
+        {cartData.cartItems.map((product) => (
+          <ListItem className={classes.listItem} key={product.title}>
+            <ListItemText primary={product.name} secondary={product.description} />
             <Typography variant="body2">{product.price}</Typography>
           </ListItem>
         ))}

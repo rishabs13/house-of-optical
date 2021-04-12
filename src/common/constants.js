@@ -1,8 +1,9 @@
 const routes = {
-  LOGIN: 'login',
+  LOGIN: '',
   DASHBOARD: 'dashboard',
   SIGNUP: 'signUp',
-  CHECKOUT: 'checkout'
+  CHECKOUT: 'checkout',
+  PRODUCTS: 'products'
 };
 
 
@@ -550,7 +551,7 @@ export const productDetailsData = [
   },
   {
      "id":77,
-     "title":"Jimmy Choo KIDS Sunglasses",
+     "title":"Jimmy Choo Sunglasses",
      "imgUrl":"/images/kids Sunglasses/image77.webp",
      "description":"Best Seller Premium Anti Glare Blue-light-filtering Transistion Progressive (No Line Bifocal) Premium Bifocal",
      "price":63
